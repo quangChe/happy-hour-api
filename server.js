@@ -2,11 +2,11 @@ require('dotenv').config();
 const express = require('express')
 const app = express();
 const axios = require('axios');
-const YelpKey = process.env.YELP_API_KEY;
 const path = require('path');
+const YelpKey = process.env.YELP_API_KEY;
 const rootDir = (file='') => path.join(__dirname, '..', 'app', 'build', file);
-
 app.use(express.static(rootDir()));
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Authorization');
@@ -14,14 +14,35 @@ app.use((req, res, next) => {
   next();
 })
 
-app.get('/list/businesses', async (req, res) => {
-  const url = `https://api.yelp.com/v3/businesses/search?${req.query.search}`;
-  const headers = {'Authorization': YelpKey};
-  const yelp = await axios.get(url, {headers});
-  res.status(200).send(yelp.data.businesses);
+app.get('/api/businesses/search', async (req, res) => {
+  if (req.query.q) return res.status(400).send('Invalid query provided.');
+  
+  try {
+    const url = `https://api.yelp.com/v3/businesses/search?${req.query.q}`;
+    const headers = {'Authorization': YelpKey};
+    const yelp = await axios.get(url, {headers});
+    res.status(200).send(yelp.data.businesses);
+  } catch (err) {
+    console.error(err);
+    const {status, data} = err.response;
+    res.status(status).send(data.error.description);
+  }
 })
 
-app.get('/*', async (req, res) => {
+app.get('/api/businesses/:id', async (req, res) => {
+  try {
+    const url = `https://api.yelp.com/v3/businesses/${req.params.id}`;
+    const headers = {'Authorization': YelpKey};
+    const yelp = await axios.get(url, {headers});
+    return res.status(200).redirect(yelp.data);
+  } catch(err) {
+    console.error(err);
+    const {status, data} = err.response;
+    return res.status(status).send(data.error.description);
+  }
+}) 
+
+app.get('/app/*', async (req, res) => {
   res.status(200).sendFile(rootDir('index.html'))
 })
 
