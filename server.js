@@ -15,30 +15,34 @@ app.use((req, res, next) => {
 })
 
 app.get('/api/businesses/search', async (req, res) => {
-  if (req.query.q) return res.status(400).send('Invalid query provided.');
+  if (!req.query.q) {
+    return res.status(400).send('Invalid query provided.');
+  }
   
   try {
     const url = `https://api.yelp.com/v3/businesses/search?${req.query.q}`;
     const headers = {'Authorization': YelpKey};
     const yelp = await axios.get(url, {headers});
-    res.status(200).send(yelp.data.businesses);
+    return res.status(200).send(yelp.data.businesses);
   } catch (err) {
     console.error(err);
-    const {status, data} = err.response;
-    res.status(status).send(data.error.description);
+    const status = err.response.status || 500;
+    const message = err.response.data.error.description || 'Unexpected error';
+    return res.status(status).send(message);
   }
 })
 
 app.get('/api/businesses/:id', async (req, res) => {
   try {
-    const url = `https://api.yelp.com/v3/businesses/${req.params.id}`;
+    const id = req.params.id;
+    const url = `https://api.yelp.com/v3/businesses/${id}`;
     const headers = {'Authorization': YelpKey};
     const yelp = await axios.get(url, {headers});
-    return res.status(200).redirect(yelp.data);
+    return res.status(200).send(yelp.data);
   } catch(err) {
-    console.error(err);
-    const {status, data} = err.response;
-    return res.status(status).send(data.error.description);
+    const status = err.response.status || 500;
+    const message = err.response.data.error.description || 'Unexpected error';
+    return res.status(status).send(message);
   }
 }) 
 
