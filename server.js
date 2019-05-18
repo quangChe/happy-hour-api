@@ -46,12 +46,13 @@ app.get('/api/businesses/:id', async (req, res) => {
   }
 }) 
 
-app.get('/app/*', async (req, res) => {
-  res.status(200).sendFile(rootDir('index.html'))
+app.get('/#/*', async (req, res) => {
+  res.status(200).sendFile(rootDir('index.html'));
 })
 
 app.use('*', (req, res) => {
   res.status(400).send('Bad Request');
 })
 
-app.listen(9000, () => console.log('Now listening on port 9000.'))
+app.listen(9000, process.env.HOSTNAME,
+  () => console.log('Now listening on port 9000.'))
