@@ -2,9 +2,7 @@ require('dotenv').config();
 const express = require('express')
 const app = express();
 const axios = require('axios');
-const path = require('path');
 const YelpKey = process.env.YELP_API_KEY;
-app.use(express.static(path.join(__dirname, '..', 'app', 'build')));
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -44,10 +42,6 @@ app.get('/api/businesses/:id', async (req, res) => {
     return res.status(status).send(message);
   }
 }) 
-
-app.get('/#/*', async (req, res) => {
-  res.status(200).sendFile('index.html');
-})
 
 app.use('*', (req, res) => {
   res.status(400).send('Bad Request');
