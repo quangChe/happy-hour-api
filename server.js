@@ -15,20 +15,6 @@ app.use((req, res, next) => {
 
 app.use('/api', routeHandler);
 
-// app.get('/api/businesses/:id', async (req, res) => {
-//   try {
-//     const id = req.params.id;
-//     const url = `https://api.yelp.com/v3/businesses/${id}`;
-//     const headers = {'Authorization': YelpKey};
-//     const yelp = await axios.get(url, {headers});
-//     return res.status(200).send(yelp.data);
-//   } catch(err) {
-//     const status = err.response.status || 500;
-//     const message = err.response.data.error.description || 'Unexpected error';
-//     return res.status(status).send(message);
-//   }
-// }) 
-
 app.use('*', (req, res) => {
   res.status(400).send('Bad Request');
 })
