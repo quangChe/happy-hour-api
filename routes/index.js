@@ -1,6 +1,8 @@
+const YelpKey = process.env.YELP_API_KEY;
 const router = require('express').Router();
+const axios = require('axios');
 
-router.get('./businesses/search', async (req, res) => {
+router.get('/businesses/search', async (req, res) => {
   if (!req.query.q) {
     return res.status(400).send('Invalid query provided.');
   }
@@ -9,11 +11,13 @@ router.get('./businesses/search', async (req, res) => {
     const url = `https://api.yelp.com/v3/businesses/search?${req.query.q}`;
     const headers = {'Authorization': YelpKey};
     const yelp = await axios.get(url, {headers});
-    return res.status(200).send(yelp.data.businesses);
+    res.status(200).send(yelp.data.businesses);
   } catch (err) {
     console.error(err);
     const status = err.response.status || 500;
     const message = err.response.data.error.description || 'Unexpected error';
-    return res.status(status).send(message);
+    res.status(status).send(message);
   }
 })
+
+module.exports = router;
