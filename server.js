@@ -3,8 +3,21 @@ const express = require('express')
 const app = express();
 const path = require('path');
 const routeHandler = require('./routes');
+const mongoose = require('mongoose');
 
 // app.use(express.static(path.join(__dirname, 'public')));
+
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true })
+
+const Test = mongoose.model('Test', new mongoose.Schema({name: String}));
+
+// Test.create({name: 'Testing123'})
+//   .then(data => console.log(data))
+//   .catch(err => console.error(err))
+
+Test.findOne()
+  .then(data => console.log('Data found???', data.name === 'Testing123'))
+  .catch(err => console.error(err))
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
