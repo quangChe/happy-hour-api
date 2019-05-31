@@ -9,7 +9,7 @@
   "author": "Quang Che <quang.n.che@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
     "mongoose": "^5.5.11"
