@@ -11,14 +11,6 @@ const mongoose = require('mongoose');
 
 // const Test = mongoose.model('Test', new mongoose.Schema({name: String}));
 
-// Test.create({name: 'Testing123'})
-//   .then(data => console.log(data))
-//   .catch(err => console.error(err))
-
-Test.findOne()
-  .then(data => console.log('Data found???', data.name === 'Testing123'))
-  .catch(err => console.error(err))
-
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Authorization');
