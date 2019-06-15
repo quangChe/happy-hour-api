@@ -1,5 +1,6 @@
 require('dotenv').config();
-const express = require('express')
+const express = require('express');
+const expressGraphQL = require('express-graphql');
 const app = express();
 const path = require('path');
 const routeHandler = require('./routes');
@@ -19,6 +20,9 @@ app.use((req, res, next) => {
 })
 
 app.use('/api', routeHandler);
+app.use('/graphql', expressGraphQL({
+  graphiql: true,
+}))
 
 app.use('*', (req, res) => {
   res.status(400).send('Bad Request');
