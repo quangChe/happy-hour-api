@@ -3,3 +3,5 @@ node_modules
 
 # Set YELP_API_KEY='Bearer key123'
 .env
+
+.vscode
