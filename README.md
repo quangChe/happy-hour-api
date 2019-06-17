@@ -15,11 +15,19 @@ npm install
 ```
 YELP_API_KEY=Bearer [YOUR_API_KEY]
 HOSTNAME=localhost // when running locally
+MONGO_URI=mongodb://localhost:PORT_NUMBER/happyHour // Replace "PORT_NUMBER"
 ```
 
 3. Start up the app.
 
 ```
-npm start // or nodemon
+npm start 
+```
+
+**Alternatively, use Dockerfile**
+
+```
+docker build -t USERNAME/happy-hour .
+docker run -p 9000:9000 --name=happy-hour USERNAME/happy-hour
 ```
 
