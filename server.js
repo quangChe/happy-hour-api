@@ -1,11 +1,11 @@
-require('dotenv').config();
+const env = require('dotenv').config();
 const express = require('express');
 const expressGraphQL = require('express-graphql');
-const app = express();
-const path = require('path');
 const routeHandler = require('./routes');
 const mongoose = require('mongoose');
+const schema = require('./schema');
 
+const app = express();
 // app.use(express.static(path.join(__dirname, 'public')));
 
 // mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true })
@@ -22,6 +22,7 @@ app.use((req, res, next) => {
 app.use('/api', routeHandler);
 app.use('/graphql', expressGraphQL({
   graphiql: true,
+  schema,
 }))
 
 app.use('*', (req, res) => {
