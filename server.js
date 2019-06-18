@@ -14,6 +14,24 @@ const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true })
 const Test = mongoose.model('Test', new mongoose.Schema({name: String}));
 
+// MySQL Startup:
+// --------------
+// const mysql = require('mysql');
+// const db = mysql.createConnection({
+//   host     : 'localhost',
+//   user     : 'root',
+//   password : process.env.MYSQL_PW,
+//   database : 'happy_hour',
+// });
+
+// db.connect((err) => err ? console.log(err) : console.log('MySQL connected!'));
+// db.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+//   if (error) throw error;
+//   console.log('The solution is: ', results[0].solution);
+// });
+// db.end();
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
