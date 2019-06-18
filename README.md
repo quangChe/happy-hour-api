@@ -1,6 +1,6 @@
 # Happy Hour API
 
-A REST API for the Happy Hour App found [here](https://github.com/quangChe/happy-hour).
+A REST API for the [Happy Hour App](https://github.com/quangChe/happy-hour).
 
 ## Getting Started
 
