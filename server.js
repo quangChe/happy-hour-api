@@ -1,16 +1,20 @@
 const env = require('dotenv').config();
-const express = require('express');
-const expressGraphQL = require('express-graphql');
-const routeHandler = require('./routes');
-const mongoose = require('mongoose');
+const path = require('path');
 const schema = require('./schema');
+const express = require('express');
+const routeHandler = require('./routes');
+const expressGraphQL = require('express-graphql');
 
 const app = express();
-// app.use(express.static(path.join(__dirname, 'public')));
 
-// mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true })
 
-// const Test = mongoose.model('Test', new mongoose.Schema({name: String}));
+// MongoDB Startup:
+// -------------------
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true })
+const Test = mongoose.model('Test', new mongoose.Schema({name: String}));
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
