@@ -4,7 +4,8 @@
   "description": "API for happy-our-app",
   "main": "server.js",
   "scripts": {
-    "test": "echo test"
+    "test": "echo test",
+    "json:server": "json-server --watch db.json"
   },
   "author": "Quang Che <quang.n.che@gmail.com>",
   "license": "ISC",
@@ -14,6 +15,7 @@
     "express": "^4.16.4",
     "express-graphql": "^0.8.0",
     "graphql": "^14.3.1",
+    "json-server": "^0.15.0",
     "lodash": "^4.17.11",
     "mongoose": "^5.5.11",
     "mysql": "^2.17.1"
