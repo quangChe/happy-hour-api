@@ -1,13 +1,13 @@
 {
   "users": [
-    { "id": "1", "firstName": "Abraham", "age": "36", "favoriteId": "1"},
-    { "id": "2", "firstName": "Bill", "age": "27", "favoriteId": "4"},
-    { "id": "3", "firstName": "Samantha", "age": "28", "favoriteId": "2"},
-    { "id": "4", "firstName": "John", "age": "34", "favoriteId": "3"},
-    { "id": "5", "firstName": "Rowland", "age": "32", "favoriteId": "5"}
+    { "id": "1", "firstName": "Abraham", "age": "36", "bookmarkId": "1"},
+    { "id": "2", "firstName": "Bill", "age": "27", "bookmarkId": "4"},
+    { "id": "3", "firstName": "Samantha", "age": "28", "bookmarkId": "2"},
+    { "id": "4", "firstName": "John", "age": "34", "bookmarkId": "3"},
+    { "id": "5", "firstName": "Rowland", "age": "32", "bookmarkId": "5"}
   ],
-  "favorites": [
-    { "id": "1", "name": "Mike's Brewery"},
+  "bookmarks": [
+    { "id": "1", "name": "Mike's Brewery", "userId": ["1", "2", "3"]},
     { "id": "2", "name": "Leche de Agave"},
     { "id": "3", "name": "Totem Spike"},
     { "id": "4", "name": "Board & Brew"},
