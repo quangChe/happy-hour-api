@@ -12,6 +12,7 @@ const FavoriteType = new GraphQLObjectType({
   fields: {
     id: { type: GraphQLString },
     name: { type: GraphQLString },
+    description: { type: GraphQLString }
   }
 })
 
@@ -37,8 +38,16 @@ const RootQuery = new GraphQLObjectType({
     user: {
       type: UserType,
       args: { id: { type: GraphQLString } },
-      resolve(parentValue, args) {
+      resolve(parentVal, args) {
         return axios.get(`http://localhost:3000/users/${args.id}`)
+          .then(resp => resp.data)
+      }
+    },
+    favorite: {
+      type: FavoriteType,
+      args: { id: { type: GraphQLString } },
+      resolve(parentVal, args) {  
+        return axios.get(`http://localhost:3000/favorites/${args.id}`)
           .then(resp => resp.data)
       }
     }
