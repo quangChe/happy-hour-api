@@ -35,7 +35,7 @@ class Database {
         if (err) reject(err);
         if (!res.length) {
           console.log('Inserting new users...');
-          this.db.query(`CREATE TABLE users (id VARCHAR(20), firstName VARCHAR(15), age INT)`, (err) => {
+          this.db.query(`CREATE TABLE users (id VARCHAR(20) NOT NULL, firstName VARCHAR(15) NOT NULL, age INT NOT NULL)`, (err) => {
             if (err) reject(err);
             const mockData = `
               ("1", "Abraham", "36"),
@@ -60,7 +60,7 @@ class Database {
         if (err) reject(err);
         if (!res.length) {
           console.log('Inserting new favorites...')
-          this.db.query(`CREATE TABLE favorites (id VARCHAR(20), name VARCHAR(15), description VARCHAR(255))`, (err) => {
+          this.db.query(`CREATE TABLE favorites (id VARCHAR(20) NOT NULL, name VARCHAR(15) NOT NULL, description VARCHAR(255))`, (err) => {
             if (err) reject(err);            
             const mockData = `
               ("1", "Mike's Brewery", "A local favorite microbrewery with some of the best IPA's"),
