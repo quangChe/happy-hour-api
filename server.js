@@ -26,13 +26,12 @@ const db = mysql.createConnection({
 });
 
 db.connect((err) => err ? console.log(err) : console.log('MySQL connected!'));
-db.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-  if (error) throw error;
-  console.log('The solution is: ', results[0].solution);
+
+db.query('SHOW TABLES LIKE "users"', (err, res, fields) => {
+  if (!res.length) db.query(`CREATE TABLE users (id VARCHAR(20), firstName VARCHAR(15), age INT)`, (err))
 });
 
-
-db.end();
+// db.end();
 
 const headers = (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
