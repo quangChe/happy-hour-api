@@ -30,11 +30,21 @@ const db = mysql.createConnection({
 db.connect((err) => err ? console.log(err) : console.log('MySQL connected!'));
 
 
-db.query('SHOW TABLES LIKE "users"', (err, res, fields) => {
-  if (!res.length) db.query(`CREATE TABLE users (id VARCHAR(20), firstName VARCHAR(15), age INT)`);
+db.query(`SHOW TABLES LIKE 'users'`, (err, res, fields) => {
+  if (!res.length) 
+    db.query(`CREATE TABLE users (id VARCHAR(20), firstName VARCHAR(15), age INT)`, (err, res, fields) => {
+      let mockData = `
+        ("1", "Abraham", "36"),
+        ("2", "Bill", "27"),
+        ("3", "Samantha", "28"),
+        ("4", "John", "34"),
+        ("5", "Rowland", "32")
+      `;
+      return db.query(`INSERT INTO users(id, firstName, age) VALUES ${mockData}`);
+    });
 });
 
-db.query(`SHOW TABLES LIKE "favorites"`, (err, res, fields) => {
+db.query(`SHOW TABLES LIKE 'favorites'`, (err, res, fields) => {
   if (!res.length) db.query(`CREATE TABLE favorites (id VARCHAR(20), name VARCHAR(15), description VARCHAR(255))`);
 }) 
 
