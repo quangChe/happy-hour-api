@@ -33,7 +33,7 @@ db.connect((err) => err ? console.log(err) : console.log('MySQL connected!'));
 db.query(`SHOW TABLES LIKE 'users'`, (err, res, fields) => {
   if (!res.length) 
     db.query(`CREATE TABLE users (id VARCHAR(20), firstName VARCHAR(15), age INT)`, (err, res, fields) => {
-      let mockData = `
+      const mockData = `
         ("1", "Abraham", "36"),
         ("2", "Bill", "27"),
         ("3", "Samantha", "28"),
@@ -45,7 +45,19 @@ db.query(`SHOW TABLES LIKE 'users'`, (err, res, fields) => {
 });
 
 db.query(`SHOW TABLES LIKE 'favorites'`, (err, res, fields) => {
-  if (!res.length) db.query(`CREATE TABLE favorites (id VARCHAR(20), name VARCHAR(15), description VARCHAR(255))`);
+  if (!res.length) {
+    db.query(`CREATE TABLE favorites (id VARCHAR(20), name VARCHAR(15), description VARCHAR(255))`, (err, res, fields) => {
+      const mockData = `
+        ("1", "Mike's Brewery", "A local favorite microbrewery with some of the best IPA's"),
+        ("2", "Leche de Agave", "Newest dive bar featuring exotic latin cocktails made"),
+        ("3", "Totem Spike", "Wear your Hawaiian shirts and experience an island getaway with 100+ tropical cocktails"),
+        ("4", "Board & Brew", "Delicious sandwiches and a long list of beers"),
+        ("5", "AJ Sports Bar", "Wings, beer and 80+ big screen TV's featuring 10+ different sports networks")
+      `;
+
+      return db.query(`INSERT INTO favorites(id, name, description) VALUES ${mockData}`);
+    });
+  }
 }) 
 
 // db.end();
