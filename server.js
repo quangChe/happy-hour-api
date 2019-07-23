@@ -15,6 +15,8 @@ const app = express();
 // mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true })
 // const Test = mongoose.model('Test', new mongoose.Schema({name: String}));
 
+
+
 // MySQL Startup:
 // --------------
 const mysql = require('mysql');
@@ -27,11 +29,20 @@ const db = mysql.createConnection({
 
 db.connect((err) => err ? console.log(err) : console.log('MySQL connected!'));
 
+
 db.query('SHOW TABLES LIKE "users"', (err, res, fields) => {
-  if (!res.length) db.query(`CREATE TABLE users (id VARCHAR(20), firstName VARCHAR(15), age INT)`, (err))
+  if (!res.length) db.query(`CREATE TABLE users (id VARCHAR(20), firstName VARCHAR(15), age INT)`);
 });
 
+db.query(`SHOW TABLES LIKE "favorites"`, (err, res, fields) => {
+  if (!res.length) db.query(`CREATE TABLE favorites (id VARCHAR(20), name VARCHAR(15), description VARCHAR(255))`);
+}) 
+
 // db.end();
+
+
+
+
 
 const headers = (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
