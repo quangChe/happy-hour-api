@@ -17,20 +17,22 @@ const app = express();
 
 // MySQL Startup:
 // --------------
-// const mysql = require('mysql');
-// const db = mysql.createConnection({
-//   host     : 'localhost',
-//   user     : 'root',
-//   password : process.env.MYSQL_PW,
-//   database : 'happy_hour',
-// });
+const mysql = require('mysql');
+const db = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : process.env.MYSQL_PW,
+  database : 'happy_hour',
+});
 
-// db.connect((err) => err ? console.log(err) : console.log('MySQL connected!'));
-// db.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-//   if (error) throw error;
-//   console.log('The solution is: ', results[0].solution);
-// });
-// db.end();
+db.connect((err) => err ? console.log(err) : console.log('MySQL connected!'));
+db.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+  if (error) throw error;
+  console.log('The solution is: ', results[0].solution);
+});
+
+
+db.end();
 
 const headers = (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
