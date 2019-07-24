@@ -35,16 +35,16 @@ class Database {
         if (err) reject(err);
         if (!res.length) {
           console.log('Inserting new users...');
-          this.db.query(`CREATE TABLE users (id VARCHAR(20) NOT NULL, firstName VARCHAR(15) NOT NULL, age INT NOT NULL)`, (err) => {
+          this.db.query(`CREATE TABLE users (id INT AUTO_INCREMENT, firstName VARCHAR(15) NOT NULL, age INT NOT NULL, PRIMARY KEY (id))`, (err) => {
             if (err) reject(err);
             const mockData = `
-              ("1", "Abraham", "36"),
-              ("2", "Bill", "27"),
-              ("3", "Samantha", "28"),
-              ("4", "John", "34"),
-              ("5", "Rowland", "32")
+              ("Abraham", "36"),
+              ("Bill", "27"),
+              ("Samantha", "28"),
+              ("John", "34"),
+              ("Rowland", "32")
             `;
-            this.db.query(`INSERT INTO users(id, firstName, age) VALUES ${mockData}`, (err, res) => {
+            this.db.query(`INSERT INTO users(firstName, age) VALUES ${mockData}`, (err, res) => {
               if (err) reject(err);
               resolve(res);
             });
@@ -60,17 +60,17 @@ class Database {
         if (err) reject(err);
         if (!res.length) {
           console.log('Inserting new favorites...')
-          this.db.query(`CREATE TABLE favorites (id VARCHAR(20) NOT NULL, name VARCHAR(15) NOT NULL, description VARCHAR(255))`, (err) => {
+          this.db.query(`CREATE TABLE favorites (id INT AUTO_INCREMENT, name VARCHAR(15) NOT NULL, description VARCHAR(255), PRIMARY KEY (id))`, (err) => {
             if (err) reject(err);            
             const mockData = `
-              ("1", "Mike's Brewery", "A local favorite microbrewery with some of the best IPA's"),
-              ("2", "Leche de Agave", "Newest dive bar featuring exotic latin cocktails made"),
-              ("3", "Totem Spike", "Wear your Hawaiian shirts and experience an island getaway with 100+ tropical cocktails"),
-              ("4", "Board & Brew", "Delicious sandwiches and a long list of beers"),
-              ("5", "AJ Sports Bar", "Wings, beer and 80+ big screen TV's featuring 10+ different sports networks")
+              ("Mike's Brewery", "A local favorite microbrewery with some of the best IPA's"),
+              ("Leche de Agave", "Newest dive bar featuring exotic latin cocktails made"),
+              ("Totem Spike", "Wear your Hawaiian shirts and experience an island getaway with 100+ tropical cocktails"),
+              ("Board & Brew", "Delicious sandwiches and a long list of beers"),
+              ("AJ Sports Bar", "Wings, beer and 80+ big screen TV's featuring 10+ different sports networks")
             `;
       
-            this.db.query(`INSERT INTO favorites(id, name, description) VALUES ${mockData}`, (err, res) => {
+            this.db.query(`INSERT INTO favorites(name, description) VALUES ${mockData}`, (err, res) => {
               if (err) reject(err);
               resolve(res);
             });
