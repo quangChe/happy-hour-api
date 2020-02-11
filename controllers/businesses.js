@@ -3,7 +3,9 @@ const axios = require('axios');
 
 module.exports = {
   search: async (req, res) => {
-    if (!req.query.q) return res.status(400).send('Invalid query provided.');
+    if (!req.query.q) {
+      return res.status(400).send('Invalid query provided.');
+    }
   
     try {
       const url = `https://api.yelp.com/v3/businesses/search?${req.query.q}`;

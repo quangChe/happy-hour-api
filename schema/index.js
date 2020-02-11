@@ -27,6 +27,7 @@ const UserType = new GraphQLObjectType({
       resolve(parentVal, args) {
         return axios.get(`http://localhost:3000/favorites/${parentVal.favoriteId}`)
           .then(resp => resp.data)
+          .catch(err => resp.err)
       }
     }
   },
@@ -41,6 +42,7 @@ const RootQuery = new GraphQLObjectType({
       resolve(parentVal, args) {
         return axios.get(`http://localhost:3000/users/${args.id}`)
           .then(resp => resp.data)
+          .catch(err => resp.err)
       }
     },
     favorite: {
@@ -49,6 +51,7 @@ const RootQuery = new GraphQLObjectType({
       resolve(parentVal, args) {  
         return axios.get(`http://localhost:3000/favorites/${args.id}`)
           .then(resp => resp.data)
+          .catch(err => resp.err)
       }
     }
   }

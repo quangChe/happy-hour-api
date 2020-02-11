@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 
-class Database {
+class MySql {
   constructor() {
     this.db = mysql.createConnection({
       host     : 'localhost',
@@ -81,4 +81,4 @@ class Database {
   }
 }
 
-module.exports = new Database();
+module.exports = new MySql();
