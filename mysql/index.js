@@ -6,7 +6,6 @@ class MySql {
       host     : 'localhost',
       user     : 'root',
       password : process.env.MYSQL_PW,
-      database : 'happy_hour',
     });
   }
 
@@ -18,6 +17,7 @@ class MySql {
       }
       else {
         try {
+          await this.initDatabase();
           await this.initUsers();
           await this.initFavorites();
           console.log('Successfully connected to MySQL!');
@@ -29,11 +29,34 @@ class MySql {
     });
   }
 
+  initDatabase() {
+    return new Promise((resolve, reject) => {
+      const createQuery = `CREATE DATABASE IF NOT EXISTS happy_hour;`;
+
+      this.db.query(createQuery, (err, res) => {
+        if (err) {
+          reject(err);
+        } else {
+          const useDbQuery = `USE happy_hour;`;
+          this.db.query(useDbQuery, (err, res) => {
+            if (err) {
+              reject(err);
+            } else {
+              console.log("Connected to happy_hour databse.");
+              resolve(res);
+            }
+          })
+          resolve(res);
+        }
+      });
+    })
+  }
+
   initUsers() {
     return new Promise((resolve, reject) => {
       this.db.query(`SHOW TABLES LIKE 'users'`, (err, res) => {
         if (err) reject(err);
-        if (!res.length) {
+        if (!res) {
           console.log('Inserting new users...');
           this.db.query(`CREATE TABLE users (id INT AUTO_INCREMENT, firstName VARCHAR(15) NOT NULL, age INT NOT NULL, PRIMARY KEY (id))`, (err) => {
             if (err) reject(err);

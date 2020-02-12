@@ -9,7 +9,8 @@ const expressGraphQL = require('express-graphql');
 const app = express();
 const db = require('./mysql');
 
-db.start();
+db.start(); // mysql
+// db.test(); // mongodb
 
 const headers = (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
