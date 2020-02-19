@@ -13,8 +13,8 @@ npm install
 2. Get a Yelp API Key and set up a .env file. In your .env file, add the following variables:
 
 ```
-YELP_API_KEY=Bearer [YOUR_API_KEY]
-HOSTNAME=localhost // when running locally
+YELP_API_KEY=[YOUR_YELP_API_KEY]
+HOSTNAME=localhost 
 MONGO_URI=mongodb://localhost:PORT_NUMBER/happyHour // Replace "PORT_NUMBER"
 ```
 

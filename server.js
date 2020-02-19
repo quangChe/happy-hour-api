@@ -9,7 +9,7 @@ const expressGraphQL = require('express-graphql');
 const app = express();
 const db = require('./mysql');
 
-db.start(); // mysql
+// db.start(); // mysql
 // db.test(); // mongodb
 
 const headers = (req, res, next) => {

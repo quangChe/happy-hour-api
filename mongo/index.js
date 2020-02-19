@@ -5,7 +5,7 @@ class MongoDB {
     this.connection = mongoose.connect(
       process.env.MONGO_URI, 
       { useNewUrlParser: true }
-    );
+    ); 
   }
 
   test(s) {
