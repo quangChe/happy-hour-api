@@ -1,6 +1,6 @@
 # Happy Hour API
 
-A REST API for the [Happy Hour App](https://github.com/quangChe/happy-hour).
+A REST API for the [Happy Hour App](https://github.com/quangChe/happy-hour-react-app).
 
 ## Getting Started
 
@@ -30,4 +30,4 @@ npm start
 docker build -t USERNAME/happy-hour .
 docker run -p 9000:9000 --name=happy-hour USERNAME/happy-hour
 ```
-
+*Note:* Dockerfile may not work because I'm still making modifications to the container. It is best to use the alternative steps 1-3 above.
